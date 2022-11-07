@@ -1,0 +1,49 @@
+#sidebar li {
+    min-width: 400px;
+    display: inline;
+}
+
+#content article{
+    position: relative;
+    margin: auto;
+}
+
+img {
+    max-width: 400px;
+}
+
+.floatleft img {
+    display: inline-block;
+    margin: auto;
+}
+
+.floatright img {
+    display: inline-block;
+    margin: auto;
+}
+
+@media (min-width: 1000px) {
+    #sidebar {
+        position: fixed;
+    }
+    #sidebar li {
+        display: block;
+        height: auto;
+        width: 200px;
+    }   
+
+    #content article { 
+        position: relative; 
+        margin-left: 200px;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .floatright {
+        float: right;
+    }
+
+    .floatleft {
+        float: left;
+    }
+}

@@ -1,0 +1,43 @@
+p {
+    padding: 2px;
+    margin: 5px;
+    border: 4px;
+    font-family: Arial;
+    font-size: 100px;
+    letter-spacing: 3px;
+}
+
+h2 {
+    filter: grayscale(50%);
+}
+
+input:invalid {
+    background-color: brown;
+}
+p:hover {
+    background-color: black;
+    color: red;
+}
+
+h1 {
+    color: rgb(31, 231, 65);
+    font-size: 2cm;
+    background-image: url("image.png");
+}
+
+p[class*="test"] {
+    text-decoration: blue wavy underline;
+}
+
+p#Laci.Laciclass{
+    text-decoration: wavy underline;
+    color: blueviolet;
+}
+
+#Laci {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+ul > li {
+    padding-top: 5px;
+}
