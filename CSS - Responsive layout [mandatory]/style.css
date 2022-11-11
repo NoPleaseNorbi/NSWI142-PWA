@@ -1,16 +1,22 @@
+img {
+    max-width: 400px;
+}
+
 #sidebar li {
     min-width: 400px;
     display: inline;
 }
 
+#sidebar {
+    border-style: solid;
+    background-color: wheat;
+    position: fixed;
+}
+
 #content article{
-    position: relative;
     margin: auto;
 }
 
-img {
-    max-width: 400px;
-}
 
 .floatleft img {
     display: inline-block;
@@ -24,15 +30,16 @@ img {
 
 @media (min-width: 1000px) {
     #sidebar {
-        position: fixed;
+        width: 200px;
+        position: absolute;
     }
     #sidebar li {
-        display: block;
+        display: list-item;
         height: auto;
         width: 200px;
     }   
 
-    #content article { 
+    #content { 
         position: relative; 
         margin-left: 200px;
         padding-left: 10%;
