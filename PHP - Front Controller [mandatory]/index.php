@@ -1,7 +1,6 @@
 <?php
 function prepare_variables($input_array, $page) {
-    file_put_contents("variables.php", "<?php
-");
+    $outside_variables = [];
     $parameters_page = preg_replace('/templates/', 'parameters', $page);
     $variables = include($parameters_page);
     foreach ($input_array as $key => $value) {
@@ -13,10 +12,7 @@ function prepare_variables($input_array, $page) {
                         if ($value == $import_import_value) {
                             $found = true;
                             $$key = $input_array[$key];
-                            $current = file_get_contents("variables.php");
-                            $current .= "$$key = " . "\"$value\"". ";";
-                            file_put_contents("variables.php", 
-                                $current);
+                            $outside_variables[$key] = $value;
                         }
                     }
                     if (!$found) {
@@ -26,10 +22,7 @@ function prepare_variables($input_array, $page) {
                 if ($import_value == 'int') {
                     if (is_numeric($value)) {
                         $$key = $input_array[$key];
-                        $current = file_get_contents("variables.php");
-                        $current .= "$$key = " . $value  . ";";
-                        file_put_contents("variables.php", 
-                            $current);
+                        $outside_variables[$key] = $value;
                     } else {
                         http_response_code(400);
                     }
@@ -37,10 +30,7 @@ function prepare_variables($input_array, $page) {
                 if ($import_value == 'string') {
                     if (is_string($value) && !is_numeric($value)) {
                         $$key = $input_array[$key];
-                        $current = file_get_contents("variables.php");
-                        $current .= "$$key = " . "\"$value\"". ";";
-                        file_put_contents("variables.php", 
-                            $current);
+                        $outside_variables[$key] = $value;
                     }
                     else {
                         http_response_code(400);
@@ -49,6 +39,7 @@ function prepare_variables($input_array, $page) {
             }
         }
     }
+    return $outside_variables;
 }
 
 function strap_together_files(){
@@ -79,8 +70,8 @@ function strap_together_files(){
             parse_str($echo, $output);
             array_shift($output);
             if(!empty($output)) {
-                prepare_variables($output, $page);
-                include("variables.php");
+                $my_vars = prepare_variables($output, $page);
+                extract($my_vars);
             }
         }
         include("$page");
